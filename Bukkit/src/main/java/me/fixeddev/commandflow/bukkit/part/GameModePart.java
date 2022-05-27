@@ -5,8 +5,7 @@ import me.fixeddev.commandflow.exception.ArgumentParseException;
 import me.fixeddev.commandflow.part.ArgumentPart;
 import me.fixeddev.commandflow.part.CommandPart;
 import me.fixeddev.commandflow.stack.ArgumentStack;
-import net.kyori.text.TextComponent;
-import net.kyori.text.TranslatableComponent;
+import net.kyori.adventure.text.Component;
 import org.bukkit.GameMode;
 
 import java.util.ArrayList;
@@ -55,7 +54,7 @@ public class GameModePart implements ArgumentPart {
         GameMode possibleGameMode = GAMEMODE_ALIASES.get(possibleGameModeName);
 
         if (possibleGameMode == null) {
-            throw new ArgumentParseException(TranslatableComponent.of("invalid.gamemode", TextComponent.of(possibleGameModeName)));
+            throw new ArgumentParseException(Component.translatable("invalid.gamemode").args(Component.text(possibleGameModeName)));
         }
 
         return Collections.singletonList(possibleGameMode);

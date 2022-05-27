@@ -8,8 +8,8 @@ import me.fixeddev.commandflow.NamespaceImpl;
 import me.fixeddev.commandflow.SimpleCommandContext;
 import me.fixeddev.commandflow.exception.CommandException;
 import me.fixeddev.commandflow.translator.Translator;
-import net.kyori.text.Component;
-import net.kyori.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -34,12 +34,12 @@ public class BukkitCommandWrapper extends Command {
         CommandContext fakeContext = new SimpleCommandContext(new NamespaceImpl(), new ArrayList<>());
         fakeContext.setCommand(command, "<command>");
 
-        this.setUsage(LegacyComponentSerializer.INSTANCE.serialize(dispatcher.getUsageBuilder().getUsage(fakeContext)));
+        this.setUsage(LegacyComponentSerializer.legacyAmpersand().serialize(dispatcher.getUsageBuilder().getUsage(fakeContext)));
 
         if (command.getDescription() != null) {
             Component translatedDescription = translator.translate(command.getDescription(), new NamespaceImpl());
 
-            this.setDescription(LegacyComponentSerializer.INSTANCE.serialize(translatedDescription));
+            this.setDescription(LegacyComponentSerializer.legacyAmpersand().serialize(translatedDescription));
         }
 
         //this.setUsage(UsageBuilder.getUsageForCommand(null, command, "<command>"));

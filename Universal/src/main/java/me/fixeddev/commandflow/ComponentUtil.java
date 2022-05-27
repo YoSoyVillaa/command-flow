@@ -1,7 +1,7 @@
 package me.fixeddev.commandflow;
 
-import net.kyori.text.Component;
-import net.kyori.text.TextComponent;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ public class ComponentUtil {
 
         TextComponent textComponent = (TextComponent) component;
 
-        TextComponent.Builder parentComponent = TextComponent.builder();
+        TextComponent.Builder parentComponent = Component.text();
         String content = textComponent.content();
 
         Matcher matcher = pattern.matcher(content);
@@ -71,7 +71,7 @@ public class ComponentUtil {
 
         TextComponent textComponent = (TextComponent) component;
 
-        TextComponent.Builder parentComponent = TextComponent.builder();
+        TextComponent.Builder parentComponent = Component.text();
         String content = textComponent.content();
         char[] array = content.toCharArray();
 

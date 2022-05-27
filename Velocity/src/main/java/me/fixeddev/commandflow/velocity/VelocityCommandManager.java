@@ -20,7 +20,8 @@ import me.fixeddev.commandflow.executor.Executor;
 import me.fixeddev.commandflow.input.InputTokenizer;
 import me.fixeddev.commandflow.translator.Translator;
 import me.fixeddev.commandflow.usage.UsageBuilder;
-import net.kyori.text.serializer.legacy.LegacyComponentSerializer;
+
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 import java.util.HashMap;
 import java.util.List;
@@ -51,7 +52,7 @@ public class VelocityCommandManager implements CommandManager {
 
         setAuthorizer(new VelocityAuthorizer());
         getTranslator().setProvider(new VelocityDefaultTranslationProvider());
-        getTranslator().setConverterFunction(LegacyComponentSerializer.INSTANCE::deserialize);
+        getTranslator().setConverterFunction(LegacyComponentSerializer.legacyAmpersand()::deserialize);
 
 
         getErrorHandler().addExceptionHandler(CommandUsage.class, (namespace, e) -> {

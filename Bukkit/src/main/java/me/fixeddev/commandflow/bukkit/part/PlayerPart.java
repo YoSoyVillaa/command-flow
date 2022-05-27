@@ -6,8 +6,7 @@ import me.fixeddev.commandflow.exception.ArgumentParseException;
 import me.fixeddev.commandflow.part.ArgumentPart;
 import me.fixeddev.commandflow.part.CommandPart;
 import me.fixeddev.commandflow.stack.ArgumentStack;
-import net.kyori.text.TextComponent;
-import net.kyori.text.TranslatableComponent;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -62,7 +61,7 @@ public class PlayerPart implements ArgumentPart {
                     return Collections.singletonList(player);
                 }
 
-                throw new ArgumentParseException(TranslatableComponent.of("player.offline", TextComponent.of(target)))
+                throw new ArgumentParseException(Component.translatable("player.offline").args(Component.text(target)))
                         .setArgument(this);
             }
         }

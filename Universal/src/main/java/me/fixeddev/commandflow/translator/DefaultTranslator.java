@@ -2,9 +2,9 @@ package me.fixeddev.commandflow.translator;
 
 import me.fixeddev.commandflow.ComponentUtil;
 import me.fixeddev.commandflow.Namespace;
-import net.kyori.text.Component;
-import net.kyori.text.TextComponent;
-import net.kyori.text.TranslatableComponent;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.TranslatableComponent;
 
 import java.util.List;
 import java.util.function.Function;
@@ -18,7 +18,7 @@ public class DefaultTranslator implements Translator {
     private static final Pattern FORMAT = Pattern.compile("%(?:(\\d+)\\$)?([A-Za-z%]|$)");
 
     public DefaultTranslator(TranslationProvider provider) {
-        this(provider, TextComponent::of);
+        this(provider, Component::text);
     }
 
     public DefaultTranslator(TranslationProvider provider, Function<String, TextComponent> stringTextComponentFunction) {
@@ -59,10 +59,10 @@ public class DefaultTranslator implements Translator {
         String trans = provider.getTranslation(namespace, component.key()); //translate
 
         if (trans == null || trans.isEmpty()) {
-            return TextComponent.of(component.key());
+            return Component.text(component.key());
         }
 
-        TextComponent translated = TextComponent.builder(trans).style(component.style()).build();
+        TextComponent translated = Component.text(trans).style(component.style());
 
         // don't do this please.
         int[] iw = new int[]{0};
@@ -87,7 +87,7 @@ public class DefaultTranslator implements Translator {
                 case '%':
                     return stringToComponent.apply("%");
                 default:
-                    return TextComponent.of(s);
+                    return Component.text(s);
             }
         });
     }
