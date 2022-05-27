@@ -6,7 +6,7 @@
 
     <groupId>me.fixeddev</groupId>
     <artifactId>commandflow</artifactId>
-    <version>0.5.0</version>
+    <version>0.5.3-Adventure</version>
     <modules>
         <module>Universal</module>
         <module>Bukkit</module>
@@ -43,13 +43,13 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <version.universal>0.5.3</version.universal>
+        <version.universal>0.5.3-Adventure</version.universal>
         <version.examples>0.5.0</version.examples>
-        <version.bukkit>0.5.2</version.bukkit>
-        <version.discord>0.5.0</version.discord>
-        <version.bungee>0.5.2</version.bungee>
-        <version.velocity>0.5.2</version.velocity>
-        <version.brigadier>0.5.2</version.brigadier>
+        <version.bukkit>0.5.3-Adventure</version.bukkit>
+        <version.discord>0.5.3-Adventure</version.discord>
+        <version.bungee>0.5.3-Adventure</version.bungee>
+        <version.velocity>0.5.3-Adventure</version.velocity>
+        <version.brigadier>0.5.3-Adventure</version.brigadier>
     </properties>
 
     <build>

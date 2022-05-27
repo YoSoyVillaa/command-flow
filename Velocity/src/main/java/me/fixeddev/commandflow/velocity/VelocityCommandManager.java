@@ -48,6 +48,8 @@ public class VelocityCommandManager implements CommandManager {
         this.commandManager = commandManager;
         this.plugin = plugin;
 
+        System.out.println("Test3");
+
         wrapperMap = new HashMap<>();
 
         setAuthorizer(new VelocityAuthorizer());
