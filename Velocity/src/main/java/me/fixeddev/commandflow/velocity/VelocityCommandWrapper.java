@@ -1,21 +1,17 @@
 package me.fixeddev.commandflow.velocity;
 
+import java.util.List;
+
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.command.RawCommand;
+
 import me.fixeddev.commandflow.CommandManager;
 import me.fixeddev.commandflow.Namespace;
 import me.fixeddev.commandflow.NamespaceImpl;
 import me.fixeddev.commandflow.command.Command;
-import me.fixeddev.commandflow.exception.ArgumentParseException;
 import me.fixeddev.commandflow.exception.CommandException;
-import me.fixeddev.commandflow.exception.CommandUsage;
-import me.fixeddev.commandflow.exception.InvalidSubCommandException;
-import me.fixeddev.commandflow.exception.NoMoreArgumentsException;
-import me.fixeddev.commandflow.exception.NoPermissionsException;
 import me.fixeddev.commandflow.translator.Translator;
 import net.kyori.text.Component;
-
-import java.util.List;
 
 public class VelocityCommandWrapper implements RawCommand {
 
@@ -41,7 +37,7 @@ public class VelocityCommandWrapper implements RawCommand {
     @Override
     public void execute(Invocation invocation) {
         CommandSource commandSource = invocation.source();
-        String argumentLine = invocation.alias() + invocation.arguments();
+        String argumentLine = invocation.alias() + " " + invocation.arguments();
 
         Namespace namespace = new NamespaceImpl();
         namespace.setObject(CommandSource.class, VelocityCommandManager.SENDER_NAMESPACE, commandSource);
