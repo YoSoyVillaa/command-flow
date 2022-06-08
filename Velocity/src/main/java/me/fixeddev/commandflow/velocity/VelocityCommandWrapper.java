@@ -45,7 +45,7 @@ public class VelocityCommandWrapper implements RawCommand {
 
         try {
             commandManager.execute(namespace, argumentLine);
-         } catch (CommandException e) {
+        } catch (CommandException e) {
             CommandException exceptionToSend = e;
 
             if (e.getCause() instanceof CommandException) {
@@ -69,12 +69,22 @@ public class VelocityCommandWrapper implements RawCommand {
     @Override
     public List<String> suggest(Invocation invocation) {
         CommandSource commandSource = invocation.source();
-        String argumentLine = invocation.arguments();
+        String argumentLine = invocation.alias() + " " + invocation.arguments();
 
         Namespace namespace = new NamespaceImpl();
         namespace.setObject(CommandSource.class, VelocityCommandManager.SENDER_NAMESPACE, commandSource);
 
         return commandManager.getSuggestions(namespace, argumentLine);
+    }
+
+    @Override
+    public boolean hasPermission(Invocation invocation) {
+        CommandSource commandSource = invocation.source();
+
+        Namespace namespace = new NamespaceImpl();
+        namespace.setObject(CommandSource.class, VelocityCommandManager.SENDER_NAMESPACE, commandSource);
+
+        return commandManager.getAuthorizer().isAuthorized(namespace, getPermission());
     }
 
     protected static void sendMessageToSender(CommandException exception, Namespace namespace) {

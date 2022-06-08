@@ -11,13 +11,14 @@ import me.fixeddev.commandflow.stack.ArgumentStack;
 import me.fixeddev.commandflow.velocity.VelocityCommandManager;
 import net.kyori.adventure.text.Component;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 public class PlayerPart implements ArgumentPart {
 
-    private final ProxyServer  proxyServer;
+    private final ProxyServer proxyServer;
     private final String name;
     private final boolean orSource;
 
@@ -61,6 +62,34 @@ public class PlayerPart implements ArgumentPart {
         }
 
         return Collections.singletonList(player);
+    }
+
+    @Override
+    public List<String> getSuggestions(CommandContext commandContext, ArgumentStack stack) {
+        return getStrings(stack);
+    }
+
+    private List<String> getStrings(ArgumentStack stack) {
+        String last = stack.hasNext() ? stack.next() : null;
+
+        List<String> names = new ArrayList<>();
+
+        if (last == null) {
+            for (Player player : proxyServer.getAllPlayers()) {
+                names.add(player.getUsername());
+            }
+            return names;
+        }
+
+        if (proxyServer.getPlayer(last).isPresent()) {
+            return Collections.emptyList();
+        }
+
+        for (Player player : proxyServer.matchPlayer(last)) {
+            names.add(player.getUsername());
+        }
+
+        return names;
     }
 
     private Player tryGetSender(CommandContext context) {
