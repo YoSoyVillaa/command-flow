@@ -6,7 +6,7 @@
 
     <groupId>me.fixeddev</groupId>
     <artifactId>commandflow</artifactId>
-    <version>0.5.3-Adventure</version>
+    <version>0.5.4-Adventure</version>
     <modules>
         <module>Universal</module>
         <module>Bukkit</module>
