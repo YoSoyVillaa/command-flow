@@ -1,5 +1,6 @@
 package me.fixeddev.commandflow.velocity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.velocitypowered.api.command.CommandSource;
@@ -69,12 +70,15 @@ public class VelocityCommandWrapper implements RawCommand {
     @Override
     public List<String> suggest(Invocation invocation) {
         CommandSource commandSource = invocation.source();
-        String argumentLine = invocation.alias() + " " + invocation.arguments();
+        List<String> arguments = new ArrayList<>();
+        arguments.add(invocation.alias());
+        if (!invocation.arguments().isEmpty()) arguments.addAll(List.of(invocation.arguments().split(" ")));
+        if (invocation.arguments().endsWith(" ")) arguments.add("");
 
         Namespace namespace = new NamespaceImpl();
         namespace.setObject(CommandSource.class, VelocityCommandManager.SENDER_NAMESPACE, commandSource);
 
-        return commandManager.getSuggestions(namespace, argumentLine);
+        return commandManager.getSuggestions(namespace, arguments);
     }
 
     @Override
