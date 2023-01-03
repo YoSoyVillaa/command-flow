@@ -7,7 +7,7 @@
     <parent>
         <artifactId>commandflow</artifactId>
         <groupId>me.fixeddev</groupId>
-        <version>0.5.8-Adventure</version>
+        <version>0.5.9-Adventure</version>
     </parent>
 
     <version>${version.bukkit}</version>
