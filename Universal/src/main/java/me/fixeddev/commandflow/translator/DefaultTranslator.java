@@ -5,6 +5,7 @@ import me.fixeddev.commandflow.Namespace;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.TranslatableComponent;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 import java.util.List;
 import java.util.function.Function;
@@ -62,7 +63,7 @@ public class DefaultTranslator implements Translator {
             return Component.text(component.key());
         }
 
-        TextComponent translated = Component.text(trans).style(component.style());
+        TextComponent translated = LegacyComponentSerializer.legacySection().deserialize(trans).style(component.style());
 
         // don't do this please.
         int[] iw = new int[]{0};

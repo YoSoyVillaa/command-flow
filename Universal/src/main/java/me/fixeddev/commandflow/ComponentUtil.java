@@ -92,13 +92,13 @@ public class ComponentUtil {
             String toReplace = new String(Arrays.copyOfRange(array, start, end));
 
             parentComponent.append(lastComponent.toBuilder()
-                    .content(textBefore).build());
+                    .content(textBefore).style(component.style()).build());
 
             lastIdx = end;
 
             TextComponent replacement = replacementProvider.apply(toReplace, matcher);
 
-            lastComponent = (TextComponent) recursiveDynamicReplace(replacement, pattern, replacementProvider);
+            lastComponent = (TextComponent) recursiveDynamicReplace(replacement.style(component.style()), pattern, replacementProvider);
             parentComponent.append(lastComponent);
         }
 
@@ -111,6 +111,7 @@ public class ComponentUtil {
 
             Component componentToAppend = lastComponent.toBuilder()
                     .content(textAfter)
+                    .style(component.style())
                     .build()
                     .children(new ArrayList<>());
 
@@ -126,8 +127,10 @@ public class ComponentUtil {
 
         component = dynamicReplace(component, pattern, replacementProvider);
 
-        children.replaceAll(component1 -> recursiveDynamicReplace(component1, pattern, replacementProvider));
-        component.children(children);
+        if (!children.isEmpty()) {
+            children.replaceAll(component1 -> recursiveDynamicReplace(component1, pattern, replacementProvider));
+            return component.children(children);
+        }
 
         return component;
     }
