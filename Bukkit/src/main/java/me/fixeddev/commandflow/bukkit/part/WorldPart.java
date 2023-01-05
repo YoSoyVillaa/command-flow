@@ -5,6 +5,7 @@ import me.fixeddev.commandflow.exception.ArgumentParseException;
 import me.fixeddev.commandflow.part.ArgumentPart;
 import me.fixeddev.commandflow.part.CommandPart;
 import me.fixeddev.commandflow.stack.ArgumentStack;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 
@@ -49,9 +50,11 @@ public class WorldPart implements ArgumentPart {
     }
 
     private World checkedWorld(ArgumentStack stack) {
-        World world = Bukkit.getWorld(stack.next());
+        String worldName = stack.next();
+        World world = Bukkit.getWorld(worldName);
         if (world == null) {
-            throw new ArgumentParseException("World not exist!");
+            throw new ArgumentParseException(Component.translatable("world.not-found").args(Component.text(worldName)))
+                    .setArgument(this);
         }
         return world;
     }

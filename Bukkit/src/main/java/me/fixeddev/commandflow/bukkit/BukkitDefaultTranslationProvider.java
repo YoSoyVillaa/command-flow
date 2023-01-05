@@ -9,6 +9,7 @@ public class BukkitDefaultTranslationProvider extends DefaultMapTranslationProvi
         translations.put("sender.unknown", "The sender for the command is unknown!");
         translations.put("sender.only-player", "Only players can execute this command!");
         translations.put("invalid.gamemode", "The gamemode %s is not valid!");
+        translations.put("world.not-found", "The world %s was not found!");
     }
 
 }
