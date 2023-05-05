@@ -15,6 +15,11 @@ public class DefaultTranslator implements Translator {
 
     private TranslationProvider provider;
     private Function<String, TextComponent> stringToComponent;
+    private final LegacyComponentSerializer componentSerializer = LegacyComponentSerializer
+            .builder()
+            .character(LegacyComponentSerializer.AMPERSAND_CHAR)
+            .hexColors()
+            .build();
 
     private static final Pattern FORMAT = Pattern.compile("%(?:(\\d+)\\$)?([A-Za-z%]|$)");
 
@@ -63,7 +68,7 @@ public class DefaultTranslator implements Translator {
             return Component.text(component.key());
         }
 
-        TextComponent translated = LegacyComponentSerializer.legacySection().deserialize(trans).style(component.style());
+        TextComponent translated = componentSerializer.deserialize(trans).style(component.style());
 
         // don't do this please.
         int[] iw = new int[]{0};
