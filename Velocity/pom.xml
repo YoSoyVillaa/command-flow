@@ -5,7 +5,7 @@
     <parent>
         <groupId>me.fixeddev</groupId>
         <artifactId>commandflow</artifactId>
-        <version>0.5.11-Adventure</version>
+        <version>0.5.12-Adventure</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
