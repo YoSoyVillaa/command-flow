@@ -73,7 +73,7 @@ public class VelocityCommandWrapper implements RawCommand {
         List<String> arguments = new ArrayList<>();
         arguments.add(invocation.alias());
         if (!invocation.arguments().isEmpty()) arguments.addAll(List.of(invocation.arguments().split(" ")));
-        if (invocation.arguments().endsWith(" ")) arguments.add("");
+        if (invocation.arguments().isEmpty() || invocation.arguments().endsWith(" ")) arguments.add("");
 
         Namespace namespace = new NamespaceImpl();
         namespace.setObject(CommandSource.class, VelocityCommandManager.SENDER_NAMESPACE, commandSource);
