@@ -3,6 +3,7 @@ package me.fixeddev.commandflow.velocity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.command.RawCommand;
 
@@ -78,7 +79,11 @@ public class VelocityCommandWrapper implements RawCommand {
         Namespace namespace = new NamespaceImpl();
         namespace.setObject(CommandSource.class, VelocityCommandManager.SENDER_NAMESPACE, commandSource);
 
-        return commandManager.getSuggestions(namespace, arguments);
+        List<String> suggestions = commandManager.getSuggestions(namespace, arguments);
+
+        if (suggestions == null) return ImmutableList.of();
+
+        return suggestions;
     }
 
     @Override
