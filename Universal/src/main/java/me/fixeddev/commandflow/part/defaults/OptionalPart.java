@@ -97,7 +97,7 @@ public class OptionalPart implements CommandPart, SinglePartWrapper {
 
     @Override
     public List<String> getSuggestions(CommandContext commandContext, ArgumentStack stack) {
-        return Collections.emptyList();
+        return part.getSuggestions(commandContext, stack);
     }
 
     @Override
